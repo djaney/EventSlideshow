@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import graph from 'fb-react-sdk';
 import ImageSlide from './ImageSlide';
+
 class MainPage extends Component {
 
 
@@ -13,24 +14,18 @@ class MainPage extends Component {
 
 
   componentDidMount() {
-    graph.setAccessToken(this.getParameterByName("token", window.location.href));
+    if(this.props.facebookToken){
+      graph.setAccessToken(this.props.facebookToken);
+      this.getImages();
+    }
 
-    this.getImages();
-
-  }
-
-  getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-      results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
 
   getImages() {
     graph.get('/' + this.props.eventId + '/photos?fields=images', (err, res) => {
+      if (err){
+        throw err;
+      }
       this.setState({
         images: this.state.images.concat(res.data)
       });
