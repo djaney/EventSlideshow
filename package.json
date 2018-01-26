@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "diaporama-react": "^2.1.0",
     "fb-react-sdk": "^1.0.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -13,5 +14,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "babel": {
+    "presets": ["es2015"]
   }
 }
