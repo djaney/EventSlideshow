@@ -43,9 +43,9 @@ class MainPage extends Component {
       dots: false,
       fade: true,
       infinite: true,
-      speed: 1000,
+      speed: 3000,
       autoplay: true,
-      autoplaySpeed: 5000,
+      autoplaySpeed: 8000,
       arrows: false
     };
     return <Slider {...settings}>
