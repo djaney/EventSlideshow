@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import graph from 'fb-react-sdk';
-import ImageSlide from './ImageSlide';
+
+import Slider from 'react-slick';
+import '../css/ImageSlide.css';
 
 class MainPage extends Component {
 
@@ -27,7 +29,7 @@ class MainPage extends Component {
         throw err;
       }
       this.setState({
-        images: this.state.images.concat(res.data)
+        images: [...res.data]
       });
       setTimeout(() => {
         this.getImages();
@@ -36,7 +38,19 @@ class MainPage extends Component {
   }
 
   render() {
-    return <div><ImageSlide images={this.state.images}/></div>;
+    const imageList = this.state.images.map((image, index) => <div key={index} style={{backgroundImage:'url('+image.images[0].source+')'}}/>);
+    const settings = {
+      dots: false,
+      fade: true,
+      infinite: true,
+      speed: 1000,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      arrows: false
+    };
+    return <Slider {...settings}>
+      {imageList}
+    </Slider>;
   }
 }
 
