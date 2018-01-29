@@ -11,6 +11,8 @@ class MainPage extends Component {
     super(props);
     this.state = {
       images: [],
+      before: null,
+      after: null
     };
   }
 
@@ -30,9 +32,14 @@ class MainPage extends Component {
       if (err){
         throw err;
       }
-      this.setState({
-        images: [...res.data]
-      });
+      if(res.paging.cursors.before !== this.state.before || res.paging.cursors.after !== this.state.after){
+        this.setState({
+          images: [...res.data],
+          before: res.paging.cursors.before,
+          after: res.paging.cursors.after,
+        });
+      }
+
       this.imageTimeout = setTimeout(() => {
         this.getImages(eventId);
       }, 10000);
