@@ -31,10 +31,8 @@ class App extends Component {
 
   render() {
     return (<div>
-
-      {this.state.token ? <MainPage eventId="1933453670208493" facebookToken={this.state.token}/> :
-        <FacebookAuth appId="402455073518566" onAuth={this.onAuth}/>}
-
+      {this.state.token ? <MainPage eventId="1933453670208493" facebookToken={this.state.token}/> : null}
+      <FacebookAuth appId="402455073518566" onAuth={this.onAuth}/>
     </div>);
   }
 }
