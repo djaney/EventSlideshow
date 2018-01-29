@@ -7,7 +7,7 @@ class SlideShowControls extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {visible: false, events: []};
+    this.state = {visible: false, events: [], eventId: null};
 
     this.toggleVisibility = this.toggleVisibility.bind(this);
     // this.eventSelected = this.eventSelected.bind(this);
@@ -26,6 +26,9 @@ class SlideShowControls extends Component {
   }
 
   eventSelected(event){
+    this.setState({
+      eventId: event.id
+    });
     this.props.onEventSelected && this.props.onEventSelected(event);
   }
 
@@ -43,7 +46,7 @@ class SlideShowControls extends Component {
   render() {
     const {visible, events} = this.state;
     const eventsList = events.map(event => (
-      <Menu.Item key={event.id} active={this.props.eventId === event.id} onClick={this.eventSelected.bind(this,event)}>
+      <Menu.Item key={event.id} active={this.state.eventId === event.id} onClick={this.eventSelected.bind(this,event)}>
       {event.name}
       </Menu.Item>
     ));
