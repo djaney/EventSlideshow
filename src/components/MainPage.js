@@ -7,6 +7,7 @@ import '../css/ImageSlide.css';
 class MainPage extends Component {
 
   imageTimeout = null
+
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +19,7 @@ class MainPage extends Component {
 
 
   componentWillReceiveProps(props) {
-    if(this.props.facebookToken){
+    if (this.props.facebookToken) {
       graph.setAccessToken(this.props.facebookToken);
       this.getImages(props.eventId);
     }
@@ -26,13 +27,13 @@ class MainPage extends Component {
   }
 
   getImages(eventId) {
-    if(!eventId) return;
-    if(this.imageTimeout) clearTimeout(this.imageTimeout);
+    if (!eventId) return;
+    if (this.imageTimeout) clearTimeout(this.imageTimeout);
     graph.get('/' + eventId + '/photos?fields=images', (err, res) => {
-      if (err){
+      if (err) {
         throw err;
       }
-      if(res.paging.cursors.before !== this.state.before || res.paging.cursors.after !== this.state.after){
+      if (res.paging.cursors.before !== this.state.before || res.paging.cursors.after !== this.state.after) {
         this.setState({
           images: [...res.data],
           before: res.paging.cursors.before,
@@ -49,8 +50,8 @@ class MainPage extends Component {
   render() {
     const imageList = this.state.images.map((image, index) => (
       <div key={index}>
-        <div className="bg" style={{backgroundImage:'url('+image.images[0].source+')'}}/>
-        <div className="fg" style={{backgroundImage:'url('+image.images[0].source+')'}}/>
+        <div className="bg" style={{backgroundImage: 'url(' + image.images[0].source + ')'}}/>
+        <div className="fg" style={{backgroundImage: 'url(' + image.images[0].source + ')'}}/>
       </div>
 
 
@@ -63,11 +64,17 @@ class MainPage extends Component {
       autoplay: true,
       autoplaySpeed: 8000,
       arrows: false,
-      pauseOnHover: false
+      pauseOnHover: false,
     };
-    return <Slider {...settings}>
-      {imageList}
-    </Slider>;
+
+    return (<div>
+      {0 < imageList.length ?
+        <Slider {...settings}>
+          {imageList}
+        </Slider>
+        : null}
+
+    </div>);
   }
 }
 
