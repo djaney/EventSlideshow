@@ -47,7 +47,14 @@ class MainPage extends Component {
   }
 
   render() {
-    const imageList = this.state.images.map((image, index) => <div key={index} style={{backgroundImage:'url('+image.images[0].source+')'}}/>);
+    const imageList = this.state.images.map((image, index) => (
+      <div key={index}>
+        <div className="bg" style={{backgroundImage:'url('+image.images[0].source+')'}}/>
+        <div className="fg" style={{backgroundImage:'url('+image.images[0].source+')'}}/>
+      </div>
+
+
+    ));
     const settings = {
       dots: false,
       fade: true,

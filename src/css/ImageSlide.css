@@ -1,13 +1,45 @@
-.slick-slider{
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background: #000000;
+.slick-slider {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000000;
 }
-.slick-slide{
-    width: 100vw;
-    height: 100vh;
-    background-size:contain;
-    background-position: center;
-    background-repeat:no-repeat;
+
+.slick-slide {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.slick-slide > .bg {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-filter: blur(20 xp);
+  -moz-filter: blur(20 xp);
+  -o-filter: blur(20 xp);
+  -ms-filter: blur(20 xp);
+  filter: blur(5px);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.slick-slide > .fg {
+  width: 100vw;
+  height: 100vh;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
