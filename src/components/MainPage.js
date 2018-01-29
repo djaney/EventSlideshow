@@ -48,7 +48,8 @@ class MainPage extends Component {
       speed: 3000,
       autoplay: true,
       autoplaySpeed: 8000,
-      arrows: false
+      arrows: false,
+      pauseOnHover: false
     };
     return <Slider {...settings}>
       {imageList}
