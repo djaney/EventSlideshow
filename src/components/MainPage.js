@@ -6,7 +6,7 @@ import '../css/ImageSlide.css';
 
 class MainPage extends Component {
 
-
+  imageTimeout = null
   constructor(props) {
     super(props);
     this.state = {
@@ -15,24 +15,26 @@ class MainPage extends Component {
   }
 
 
-  componentDidMount() {
+  componentWillReceiveProps(props) {
     if(this.props.facebookToken){
       graph.setAccessToken(this.props.facebookToken);
-      this.getImages();
+      this.getImages(props.eventId);
     }
 
   }
 
-  getImages() {
-    graph.get('/' + this.props.eventId + '/photos?fields=images', (err, res) => {
+  getImages(eventId) {
+    if(!eventId) return;
+    if(this.imageTimeout) clearTimeout(this.imageTimeout);
+    graph.get('/' + eventId + '/photos?fields=images', (err, res) => {
       if (err){
         throw err;
       }
       this.setState({
         images: [...res.data]
       });
-      setTimeout(() => {
-        this.getImages();
+      this.imageTimeout = setTimeout(() => {
+        this.getImages(eventId);
       }, 10000);
     });
   }
